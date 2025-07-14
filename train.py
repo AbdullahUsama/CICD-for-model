@@ -17,14 +17,14 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler
 
-cat_col = [1,2,3]
-num_col = [0,4]
+cat_col = [1, 2, 3]
+num_col = [0, 4]
 
 transform = ColumnTransformer(
     [
         ("encoder", OrdinalEncoder(), cat_col),
         ("num_imputer", SimpleImputer(strategy="median"), num_col),
-        ("num_scaler", StandardScaler(), num_col)
+        ("num_scaler", StandardScaler(), num_col),
     ]
 )
 
@@ -32,11 +32,11 @@ transform = ColumnTransformer(
 pipe = Pipeline(
     steps=[
         ("preprocessing", transform),
-        ("model", RandomForestClassifier(n_estimators=100, random_state=125))
+        ("model", RandomForestClassifier(n_estimators=100, random_state=125)),
     ]
 )
 
-pipe.fit(X_train,y_train)
+pipe.fit(X_train, y_train)
 
 from sklearn.metrics import accuracy_score, f1_score
 
@@ -44,7 +44,7 @@ predictions = pipe.predict(X_test)
 accuracy = accuracy_score(y_test, predictions)
 f1 = f1_score(y_test, predictions, average="macro")
 
-print("Accuracy:", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))    
+print("Accuracy:", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))
 
 with open("results/metrics.txt", "w") as outfile:
     outfile.write(f"\nAccuracy = {accuracy}, F1 Score = {f1}.")
