@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      - name: Install Packages
+        run: make install
       - name: Deployment To Hugging Face
         env:
           HF: ${{ secrets.HF }}
