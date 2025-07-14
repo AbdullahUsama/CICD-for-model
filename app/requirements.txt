@@ -3,3 +3,4 @@ scikit-learn
 matplotlib
 skops
 black
+huggingface_hub
