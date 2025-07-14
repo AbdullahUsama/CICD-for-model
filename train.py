@@ -27,7 +27,6 @@ transform = ColumnTransformer(
         ("num_scaler", StandardScaler(), num_col)
     ]
 )
-#t
 
 
 pipe = Pipeline(
